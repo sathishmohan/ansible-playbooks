@@ -1,0 +1,18 @@
+---
+
+- name: Adding nginx repo
+  apt_repository: repo='ppa:nginx/stable' state=present
+
+- name: Update package
+  apt: update_cache=yes state=latest
+
+- name: Install nginx
+  apt: name=nginx state=present
+
+- name: Stop nginx
+  service: name=nginx state=stopped
+
+- name: Start nginx
+  service: name=nginx state=started
+
+
