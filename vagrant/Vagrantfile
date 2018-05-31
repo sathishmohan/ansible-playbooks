@@ -1,0 +1,37 @@
+# -*- mode: ruby -*-
+# vi: set ft=ruby :
+ 
+Vagrant.configure("2") do |config|
+    config.vm.box = "ubuntu/trusty64"
+ 
+    # Config for web server 1
+    config.vm.define :webserver1 do |webserver1|
+        webserver1.vm.provider :virtualbox do |vb|
+            vb.name = "web-server-1"
+        end
+        webserver1.vm.hostname = "webserver1"
+        webserver1.vm.network "private_network", ip: "192.168.56.115"
+        webserver1.vm.provision :shell, path: "webserver.sh"
+    end
+ 
+    # Config for web server 2
+    config.vm.define :webserver2 do |webserver2|
+        webserver2.vm.provider :virtualbox do |vb|
+            vb.name = "web-server-2"
+        end
+        webserver2.vm.hostname = "webserver2"
+        webserver2.vm.network "private_network", ip: "192.168.56.116"
+        webserver2.vm.provision :shell, path: "webserver.sh"
+    end
+ 
+    # Config for haproxy
+    config.vm.define :haproxy do |haproxy|
+        haproxy.vm.provider :virtualbox do |vb|
+            vb.name = "HAProxy"
+        end
+        haproxy.vm.hostname = "haproxy"
+        haproxy.vm.network :forwarded_port, guest: 80, host: 8080
+        haproxy.vm.network "private_network", ip: "192.168.56.117"
+        haproxy.vm.provision :shell, path: "haproxy.sh"
+    end
+end
