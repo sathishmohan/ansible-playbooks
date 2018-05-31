@@ -1,0 +1,6 @@
+---
+- hosts: sensu-master
+  sudo: yes
+  roles:
+  - sensu-master
+  - sensu-check

@@ -1,0 +1,20 @@
+---
+- name: Copy sensuchecks to /etc/sensu/conf.d/
+  template: src=sensuchecks.j2 dest=/etc/sensu/conf.d/default.json
+ 
+- name: Copy check-disk.rb to /etc/sensu/plugins/check-disk.rb
+  template: src=check-disk.rb dest=/etc/sensu/plugins/check-disk.rb
+
+- name: Copy check-load.rb to /etc/sensu/plugins/check-load.rb
+  template: src=check-load.rb dest=/etc/sensu/plugins/check-load.rb
+
+- name: Copy check-procs.rb to /etc/sensu/plugins/check-procs.rb
+  template: src=check-procs.rb dest=/etc/sensu/plugins/check-procs.rb
+
+- name: Restart sensu-server,client,api,uchiwa services
+  service: name={{ item }} state=restarted
+  with_items:
+  - sensu-server
+  - sensu-client
+  - sensu-api
+
