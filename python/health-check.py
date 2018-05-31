@@ -1,7 +1,7 @@
 ###
 #Script to check the health status of the pulsar machine
 #Usage : pyhton health-check.py
-#Author - sathishm@cavirin.com
+#Author - sathishm
 #####
 
 
