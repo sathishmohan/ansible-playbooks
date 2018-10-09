@@ -1,0 +1,11 @@
+# About: global variables
+aws_access_key: aws_access_key
+aws_secret_key: aws_secret_key
+vpc_id: vpc-id
+security_group: sg-id
+vpc_subnet_id: subnet-id
+image: ami-id
+instance_type: t2.micro
+region: us-east-1
+count: 1
+keypair: keypair
