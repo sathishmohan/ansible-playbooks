@@ -47,3 +47,8 @@
                     line="{{item.private_ip}} hostname={{name}}" 
                     state="present"
       with_items: "{{ec2.instances}}"
+
+    - name: Register public key
+      become: yes
+      shell: cat ~/.ssh/id_rsa.pub | ssh -i ~/.ssh/abc.pem -o UserKnownHostsFile=/dev/null -o StrictHostKeyChecking=no ec2-user@{{item.private_ip}} 'cat >> ~/.ssh/authorized_keys'
+      with_items: "{{ ec2.instances }}"
